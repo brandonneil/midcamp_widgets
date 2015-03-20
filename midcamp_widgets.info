@@ -1,0 +1,8 @@
+name = MidCamp Widgets
+description = Adds widgets to CKEditor
+
+core = 7.x
+
+dependencies[] = wysiwyg
+
+stylesheets[all][] = callout.css

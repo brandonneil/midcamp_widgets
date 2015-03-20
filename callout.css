@@ -1,0 +1,49 @@
+.callout {
+    padding: 8px;
+    margin: 10px;
+    border: 1px solid #ddd;
+    max-width: 100%;
+    min-width: 200px;
+}
+
+@media all and (min-width: 600px) {
+    .callout.align-right {
+        float: right;
+    }
+    .callout.align-left {
+        float: left;
+    }
+}
+.callout.align-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.primary {;
+  font-size: 1.2em;
+  line-height: 1.3em;
+  font-weight: 400;
+  background-color: #F2F2F2;
+  border: none;
+  border-top: 1px solid #DFDFDF;
+  border-bottom: 1px solid #DFDFDF;
+}
+
+.callout.fancy {
+    padding: 8px;
+    margin: 10px;
+    background: #eee;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 1px #fff inset, 0 -1px 0px #ccc inset;
+    max-width: 100%;
+    min-width: 200px;
+}
+
+.fancy .callout-content {
+    box-shadow: 0 1px 1px #ddd inset;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    background: #fff;
+    padding: 8px;
+}
