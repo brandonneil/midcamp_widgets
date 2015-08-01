@@ -1,21 +1,35 @@
 <?php
 
 /**
- * Implements hook_ckeditor_plugin().
- */
-
-
-/**
  * Implements hook_wysiwyg_plugin().
  */
-function midcamp_widgets_wysiwyg_plugin($editor, $version) {
+function campwidgets_wysiwyg_plugin($editor, $version) {
   switch ($editor) {
     case 'ckeditor':
       return array(
+        'layoutmanager' => array(
+          // A list of buttons provided by this native plugin. The key has to
+          // match the corresponding JavaScript implementation. The value is
+          // is displayed on the editor configuration form only.
+          'buttons' => array(
+            'AddLayout' => t('Layout Manager'),
+          ),
+          // Boolean whether the editor needs to load this plugin. When TRUE,
+          // the editor will automatically load the plugin based on the 'path'
+          // variable provided. If FALSE, the plugin either does not need to
+          // be loaded or is already loaded by something else on the page.
+          // Most plugins should define TRUE here.
+          'load' => TRUE,
+          // Boolean whether this plugin is a native plugin, i.e. shipped with
+          // the editor. Definition must be ommitted for plugins provided by
+          // other modules. TRUE means 'path' and 'filename' above are ignored
+          // and the plugin is instead loaded from the editor's plugin folder.
+          'internal' => TRUE,
+        ),
         'callout' => array(
           // The full path to the native editor plugin, no trailing slash.
           // Ignored when 'internal' is set to TRUE below.
-          'path' => drupal_get_path('module', 'midcamp_widgets') . '/plugins/callout',
+          'path' => drupal_get_path('module', 'campwidgets') . '/plugins/callout',
           // The name of the plugin's main JavaScript file.
           // Ignored when 'internal' is set to TRUE below.
           // Default value depends on which editor the plugin is for.
@@ -46,12 +60,14 @@ function midcamp_widgets_wysiwyg_plugin($editor, $version) {
 /**
  * Implements hook_wysiwyg_editor_settings_alter().
  */
-function midcamp_widgets_wysiwyg_editor_settings_alter(&$settings, $context) {
+function campwidgets_wysiwyg_editor_settings_alter(&$settings, $context) {
   // Check if the editor is CKEditor.
   if ($context['profile']->editor == 'ckeditor') {
 
+    $settings['layoutmanager_loadbootstrap'] = TRUE;
+
     // Get module path.
-    $module_location = $GLOBALS['base_path'] . drupal_get_path('module', 'midcamp_widgets');
+    $module_location = $GLOBALS['base_path'] . drupal_get_path('module', 'campwidgets');
 
     // Include custom css files.
     $settings['contentsCss'][] = $module_location . '/callout.css';
@@ -78,6 +94,5 @@ function midcamp_widgets_wysiwyg_editor_settings_alter(&$settings, $context) {
 
     $settings['stylesSet'][] = $style_fancy;
     $settings['stylesSet'][] = $style_primary;
-
   }
 }
